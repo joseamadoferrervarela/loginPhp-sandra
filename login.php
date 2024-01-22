@@ -1,7 +1,13 @@
 <?php 
 
-require "database.php";
 
+session_start();
+if (isset($_SESSION["user_id"])) {
+    header("Location:/php-login");
+    # code...
+}
+
+require "database.php";
 
 if (!empty($_POST['email']) && !empty($POST['password'])){
 $sql ="SELECT id, email, password FROM usuarios WHRERE email=:email)";
@@ -14,7 +20,7 @@ $message= "";
 
 if (count($results)>0 && password_verify($_POST["password"], $results['password'])) {
     $_SESSION[user_id]= $results["password"];
-    header("Location:/php-submit");
+    header("Location:/php-login");
 }else{
     $message="Sorry, those credentials do not match";
 }

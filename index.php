@@ -1,4 +1,23 @@
 
+<?php 
+session_start();
+require "database.php";
+
+
+if(isset($_SESSION[user_id])){
+$records =$conn->prepare("SELECT id ,email, password FROM usuarios id=:id");
+$records->bindParam(":id",$_SESSION['user-id']);
+$records->execute();
+$results = $records-> fetch(PDP::FETCH_ASSOC);
+$user=null;
+
+if(count($results)>0){
+$user =$results;
+}
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +31,16 @@
 </head>
 <body>
     <?php require 'parcials/header.php'?>
+
     
+    <?php if (!empty ($user)):?>
+    <br>Welcome. <?= $user['email'] ?> 
+    <br> You area suscessfully logged In
+    <a href="logout.php">Logout</a>
+    <?php else: ?>
     <h1>Please login or Singup</h1>
     <a href="login.php">Login</a> or
     <a href="singup.php">SingUp</a>
+    <?php endif; ?>
 </body>
 </html>
