@@ -21,7 +21,7 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>s
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,10 +32,6 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 </head>
 <body>
     <?php require 'parcials/header.php'?>
-    
-    <?php if(!empty($message)):?>
-    <p> <?= $message ?> </p>
-    <?php endif ?>
 
 
     <h1>singUp</h1>
@@ -46,5 +42,10 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
         <input type="password" name="confirm_password" placeholder="confirm your password">
         <input type="submit" value="send">
     </form>
+
+    <?php if(!empty($message)):?>
+    <p> <?= $message ?> </p>
+    <?php endif ?>
+
 </body>
 </html>
