@@ -3,26 +3,28 @@
 
 session_start();
 if (isset($_SESSION["user_id"])) {
-    header("Location:/php-login");
+    header("Location:/loginPhp%20sandra/index.php");
     # code...
 }
 
 require "database.php";
 
-if (!empty($_POST['email']) && !empty($POST['password'])){
-$sql ="SELECT id, email, password FROM usuarios WHRERE email=:email)";
+if (!empty($_POST['email']) && !empty($_POST['password'])){
+$sql ="SELECT id, email, password FROM usuarios WHERE email=:email";
 $stm = $conn->prepare($sql);
 $stm-> bindParam(':email', $_POST['email']);
-$results=$stm->execute();
-$results->fetch(PDP::FETCH_ASSOC);
+$stm->execute();
+$results=$stm->fetch(PDO::FETCH_ASSOC);
 
 $message= "";
 
-if (count($results)>0 && password_verify($_POST["password"], $results['password'])) {
-    $_SESSION[user_id]= $results["password"];
-    header("Location:/php-login");
+if (count($results)>0 && password_verify($_POST['password'], $results['password'])) {
+    $_SESSION['user_id']= $results["id"];
+    header("Location:/loginPhp%20sandra/index.php");
+    // $message="hola";
 }else{
-    $message="Sorry, those credentials do not match";
+    $message = "hola".$results['id'].$results['email'].$results['password'];
+    // $message="Sorry, those credentials do not match";
 }
 }
 ?>
